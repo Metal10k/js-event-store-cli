@@ -1,0 +1,20 @@
+{
+  "name": "js-event-store",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "node scripts/test.js",
+    "event": "node scripts/event.js"
+  },
+  "bin": {
+    "stuff": "bin/stuff.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "argv": "0.0.2",
+    "jsonfile": "^2.2.3",
+    "yargs": "^3.32.0"
+  }
+}
