@@ -1,6 +1,6 @@
 {
-  "name": "js-event-store",
-  "version": "1.0.0",
+  "name": "js-event-store-cli",
+  "version": "0.0.1",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -8,13 +8,16 @@
     "event": "node scripts/event.js"
   },
   "bin": {
-    "record-event": "bin/record-event"
+    "record-event": "bin/record-event",
+    "filter-events": "bin/filter-events",
+    "undo-last-event": "bin/undo-last-event"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "argv": "0.0.2",
     "jsonfile": "^2.2.3",
+    "underscore": "^1.8.3",
     "yargs": "^3.32.0"
   }
 }

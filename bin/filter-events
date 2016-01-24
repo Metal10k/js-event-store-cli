@@ -1,18 +1,18 @@
 #!/usr/bin/env node
 'use strict';
 
+var _ = require("underscore");
 var argv = require('yargs').argv;
 var parser = require('./../scripts/lib/parser');
 var db = require('./../scripts/lib/db');
     
 var inputs = argv._;  
 
-
-var obj = parser.parse(inputs);
+//console.log(inputs);
+var filter = parser.parseFilters(inputs);
 
 var store = db.get();
-var evt = {date: new Date(),  data: obj};
-console.log("Recording event: ");
-console.log(evt);
-store.events.push(evt);
-db.set(store);
+
+//console.log(store.events);
+ var results = _(store.events).filter(filter);
+console.log(results);

@@ -11,8 +11,7 @@ var inputs = argv._;
 var obj = parser.parse(inputs);
 
 var store = db.get();
-var evt = {date: new Date(),  data: obj};
-console.log("Recording event: ");
+var evt = store.events.pop();
+console.log("Removing event:");
 console.log(evt);
-store.events.push(evt);
 db.set(store);
