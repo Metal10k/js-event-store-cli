@@ -8,7 +8,7 @@
     "event": "node scripts/event.js"
   },
   "bin": {
-    "stuff": "bin/stuff.js"
+    "record-event": "bin/record-event"
   },
   "author": "",
   "license": "ISC",
