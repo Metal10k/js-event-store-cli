@@ -10,13 +10,18 @@
   "bin": {
     "record-event": "bin/record-event",
     "filter-events": "bin/filter-events",
-    "undo-last-event": "bin/undo-last-event"
+    "undo-last-event": "bin/undo-last-event",
+    "event-editor": "bin/event-editor"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "argv": "0.0.2",
+    "consolidate": "^0.14.0",
+    "express": "^4.13.4",
+    "jade": "^1.11.0",
     "jsonfile": "^2.2.3",
+    "open": "0.0.5",
     "underscore": "^1.8.3",
     "yargs": "^3.32.0"
   }

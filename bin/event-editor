@@ -1,0 +1,45 @@
+#!/usr/bin/env node
+'use strict';
+
+var express = require('express')
+  , cons = require('consolidate')
+  , app = express();
+  
+var open = require("open");
+var db = require('./../scripts/lib/db');
+
+// assign the swig engine to .html files
+app.engine('html', cons.swig);
+
+// set .html as the default extension
+app.set('view engine', 'jade');
+app.set('views', __dirname + '/views');
+
+app.use(express.static(__dirname + '/static'));
+
+// var users = [];
+// users.push({ name: 'tobi' });
+// users.push({ name: 'loki' });
+// users.push({ name: 'jane' });
+
+app.get('/', function(req, res){
+  res.render('index', {
+    title: 'Event viewer'
+  });
+});
+
+app.get('/data', function(req, res){
+    res.setHeader('Content-Type', 'application/json');
+    res.send(JSON.stringify(db.get()));
+});
+
+// app.get('/users', function(req, res){
+//   res.render('users', {
+//     title: 'Users',
+//     users: users
+//   });
+// });
+
+app.listen(4201);
+console.log('Express server listening on port 3000');
+open("http://localhost:4201");

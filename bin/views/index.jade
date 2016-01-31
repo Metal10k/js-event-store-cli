@@ -1,0 +1,83 @@
+mixin with(val)
+  <!-- ko with: !{val} -->
+  block
+  <!-- /ko -->
+
+mixin if(val)
+  <!-- ko if: !{val} -->
+  block
+  <!-- /ko -->
+
+mixin each(val)
+  <!-- ko foreach: !{val} -->
+  block
+  <!-- /ko -->
+
+html
+    head
+        script(src='https://code.jquery.com/jquery-2.2.0.min.js')
+        script(src='https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.0/knockout-min.js')
+        script(src='https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js')
+        script(src='viewmodels.js')
+        style.
+            body{
+                margin-right: 400px;
+            }
+            div.left{
+                float: left;
+                width: 100%;
+                background-color: #CCF;
+            }
+            div.right{
+                float: right;
+                width: 400px;
+                margin-right: -400px;
+                background-color: #FFA;
+            }
+            div.cleared{
+                clear:both;
+            }
+            .date{
+                margin:6px;
+                color: #795548;
+            }
+            .data {
+                margin-left: 20px;
+            }
+            .data span{
+                margin:2px;
+            }
+            .data span.val{
+                color:orange;
+                margin-right:4px;
+            }
+            
+    body
+        h2=title
+        div.left
+            
+            fieldset
+                label filter
+                input(data-bind="value: filterString")
+            div(data-bind='foreach: $data.eventsExpanded')
+                div.date(data-bind='text: $data.date.toDateString()')
+                div.data(data-bind='foreach: $data.data')
+                    div.data-field
+                        span.name(data-bind='text: $data.name')
+                        
+                        +if('$data.value instanceof Array && typeof($data.value) !==\'string\' ')
+                            span.val(data-bind="text: ko.toJSON($data.value)")
+                        +if('!($data.value instanceof Array && typeof($data.value) !==\'string\')')
+                            span.val(data-bind='text: $data.value')
+                //div.data(data-bind='text: ko.toJSON($data.data)')
+            // div(data-bind='text: ko.toJSON($data)')
+        div.right
+            form
+                fieldset
+                    label map
+                    input(data-bind="value: mapString")
+                fieldset
+                    label reduce
+                    input(data-bind="value: reduceString")
+
+        div.cleared
