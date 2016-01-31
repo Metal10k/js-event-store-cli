@@ -19,6 +19,10 @@ It is also possible to undo the last event
 
 > undo-last-event
 
+You can now also view events from the event editor. This will fire up the browser app and allow you to explore the applicable db.json using filter/map/reduce
+
+> event-editor
+
 It is also possible to do some simple filtering operations. This is a work in progress.
 
 All events where a property exists:
