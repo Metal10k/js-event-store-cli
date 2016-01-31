@@ -59,6 +59,7 @@ html
             fieldset
                 label filter
                 input(data-bind="value: filterString")
+                div.help (date: Date) (data: any)
             div(data-bind='foreach: $data.eventsExpanded')
                 div.date(data-bind='text: $data.date.toDateString()')
                 div.data(data-bind='foreach: $data.data')
@@ -76,8 +77,12 @@ html
                 fieldset
                     label map
                     input(data-bind="value: mapString")
+                    div.help (date: Date) (data: any)
                 fieldset
                     label reduce
                     input(data-bind="value: reduceString")
+                    div.help (acc: fromMap) (item: fromMap)
+            div(data-bind='foreach: $data.eventsProcessedFull')
+                div(data-bind='text: ko.toJSON($data)')
 
         div.cleared

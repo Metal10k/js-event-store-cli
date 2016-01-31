@@ -9,14 +9,14 @@ function viewModel(){
         
         innerEvents = _(innerEvents).filter(function(e){
             try{
-            return _this.filterFn().call(e);
+            return _this.filterFn()(e); //_this.filterFn().call(e);
             }catch(ex){
                 console.log(ex);
                 return false;
             }
         });
         return innerEvents;
-    })
+    });
     
     this.eventsExpanded = ko.computed(function(){
         return _this.eventsFiltered().map(function(e){
@@ -40,11 +40,41 @@ function viewModel(){
         if(_this.filterString() === "")
             return function(){return true;};
         
-        return new Function("return " + "function () { var data = this.data; var date = this.date; return " + preprocess(_this.filterString()) + "; }")();
+        return new Function("return " + "function (item) { var data = item.data; var date = item.date; return " + preprocess(_this.filterString()) + "; }")();
     })
     
     this.mapString = ko.observable("");
+    this.mapFn = ko.computed(function(){
+        if(_this.mapString() === "")
+            return function(item){return item;};
+        
+        return new Function("return " + "function (item) { var data = item.data; var date = item.date; return " + preprocess(_this.mapString()) + "; }")();
+    })
+    
     this.reduceString = ko.observable("");
+    this.reduceFn = ko.computed(function(){
+        return new Function("return " + "function (item, acc) {  return " + preprocess(_this.reduceString()) + "; }")();
+    });
+    
+    this.eventsProcessedFull = ko.computed(function(){
+        var mapped = _this.eventsFiltered().map(function(e){
+            try{
+                return _this.mapFn()(e);
+            }catch(ex){
+                return null;
+            }
+        });
+        
+        if(_this.reduceString() !== "")
+            return _(mapped).reduce(function(acc, item){
+                try{
+                    return _this.reduceFn()(acc, item);
+                }catch(ex){
+                    return acc;
+                }
+            });
+        return mapped;
+    });
 };
 
 $(function(){
